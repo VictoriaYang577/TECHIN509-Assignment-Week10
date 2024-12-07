@@ -3,9 +3,9 @@ class Board:
         self.grid = [[" " for _ in range(3)] for _ in range(3)]
 
     def draw_board(self):
-        """
-        Draw the board of Tic-Tac-Toe game
-        """
+        for row in self.grid:  # go through everything 
+            print("|".join(row))  # use | 
+            print("-" * 5)  # print under each line 
 
     def update_board(self, row: int, col: int, symbol: str) -> bool:
         """
@@ -37,3 +37,12 @@ class Board:
             bool: Boolean outcome indicating whether the board is full
         """
         return all(cell != " " for row in self.grid for cell in row)
+
+if __name__ == "__main__":
+    board = Board()
+
+    # Testsss
+    board.grid = [["X", "O", "X"], [" ", "X", "O"], ["O", " ", "X"]]
+    
+    # use draw_board method print grid
+    board.draw_board() 
