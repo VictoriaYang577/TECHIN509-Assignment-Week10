@@ -22,12 +22,24 @@ class Board:
         return False
 
     def check_winner(self) -> str:
-        """
-        Check the winner of the current board
+        # Check rows for winner
+        for row in self.grid:
+            if row[0] == row[1] == row[2] != " ":
+                return row[0]
 
-        Returns:
-            str: The winning symbol ('X' or 'O') if there is a winner, else an empty string
-        """
+        # Check columns for winner
+        for col in range(3):
+            if self.grid[0][col] == self.grid[1][col] == self.grid[2][col] != " ":
+                return self.grid[0][col]
+
+        # Check diagonals for winner
+        if self.grid[0][0] == self.grid[1][1] == self.grid[2][2] != " ":
+            return self.grid[0][0]
+        if self.grid[0][2] == self.grid[1][1] == self.grid[2][0] != " ":
+            return self.grid[0][2]
+
+        # No winner
+        return ""
 
     def is_full(self) -> bool:
         """
@@ -46,3 +58,22 @@ if __name__ == "__main__":
     
     # use draw_board method print grid
     board.draw_board() 
+
+if __name__ == "__main__":
+    board = Board()
+
+    # 测试1
+    board.grid = [["X", "X", "X"], ["O", " ", "O"], [" ", " ", " "]]
+    print("Winner:", board.check_winner())  # 输出: Winner: X
+
+    # 测试2
+    board.grid = [["X", "O", " "], ["X", "O", " "], [" ", "O", " "]]
+    print("Winner:", board.check_winner())  # 输出: Winner: O
+
+    # 测试3
+    board.grid = [["X", "O", "O"], [" ", "X", " "], ["O", " ", "X"]]
+    print("Winner:", board.check_winner())  # 输出: Winner: X
+
+    # 测试4
+    board.grid = [["X", "O", "X"], ["X", "O", "O"], ["O", "X", "O"]]
+    print("Winner:", board.check_winner())  # 输出: Winner: 
